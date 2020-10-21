@@ -1,0 +1,44 @@
+{
+  "name": "portchain-challenge",
+  "version": "0.0.1",
+  "description": "portchain-challenge",
+  "homepage": "https://github.com/jacobbogers/portchain-challenge#readme",
+  "keywords": [],
+  "author": "jacob bogers <info@mail.jacob-bogers.com>",
+  "license": "MIT",
+  "private": true,
+  "engines":{
+    "node": "12.19.0"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "coverage": "nyc mocha",
+    "lint": "eslint src/**/*.js test/**/*.test.js",
+    "fix":"eslint src/**/*.js test/**/*.test.js --fix",
+    "test": "mocha"
+  },
+  "nyc": {
+    "instrument": true,
+    "reporter": [
+      "html",
+      "text"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacobbogers/portchain-challenge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jacobbogers/portchain-challenge/issues"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^7.11.0",
+    "mocha": "^8.2.0",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "colors": "^1.4.0"
+  }
+}
