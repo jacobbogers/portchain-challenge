@@ -7,14 +7,14 @@
   "author": "jacob bogers <info@mail.jacob-bogers.com>",
   "license": "MIT",
   "private": true,
-  "engines":{
+  "engines": {
     "node": "12.19.0"
   },
   "scripts": {
     "start": "node src/app.js",
     "coverage": "nyc mocha",
-    "lint": "eslint src/**/*.js test/**/*.test.js",
-    "fix":"eslint src/**/*.js test/**/*.test.js --fix",
+    "lint": "eslint src/**/*.js",
+    "fix": "eslint .eslintrc.js src/**/*.js --fix",
     "test": "mocha"
   },
   "nyc": {
@@ -35,6 +35,8 @@
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
     "mocha": "^8.2.0",
     "nyc": "^15.1.0"
   },

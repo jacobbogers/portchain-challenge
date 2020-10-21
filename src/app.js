@@ -1,3 +1,6 @@
-console.log('hello world')
 
-//some 
+
+const s = 'hello world';
+console.log(s);
+
+// some
