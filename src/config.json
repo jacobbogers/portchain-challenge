@@ -1,0 +1,5 @@
+{
+    "urlPortCalls": "https://import-coding-challenge-api.portchain.com/api/v2/schedule/",
+    "urlVessels": "https://import-coding-challenge-api.portchain.com/api/v2/vessels",
+    "parallelism": 30
+}

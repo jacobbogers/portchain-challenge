@@ -1,10 +1,10 @@
 
 const setContentType = require('./setContentType');
 const omitInPlaceIgnoreCase = require('../omitIgnoreCase');
-const getResponseFromRequest = require('../getResponseFromRequest');
+const getResponseFromRequest = require('./getResponseFromRequest');
 const writeToStreamAndEnd = require('./writeToStreamAndEnd');
 const bleedReadable = require('../bleedReadable');
-const stripCtrlCodes = require('../stripCtrlCodes');
+const stripCtrlCodes = require('../stripControlCodes');
 const isHttpSuccess = require('./isHttpSuccess');
 
 module.exports = function createHttpClient(createHttpRequest, logger, config) {
@@ -24,7 +24,7 @@ module.exports = function createHttpClient(createHttpRequest, logger, config) {
 
     const clientRequest = createHttpRequest(host, port, method, encodeURI(path), headers, proxyHost, proxyPort);
     const captureRequestPromise = getResponseFromRequest(clientRequest);
-    const [msg, err1] = await writeToStreamAndEnd(clientRequest, originBody);
+    const [err1, msg] = await writeToStreamAndEnd(clientRequest, originBody);
     if (err1 || msg !== true) {
       const errMsg = stripCtrlCodes(`[http-req][send04][${String(err1)}]`);
       logger.error(errMsg);
