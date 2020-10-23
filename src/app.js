@@ -15,7 +15,8 @@ const buildStarSchema = require('./buildStarSchema');
 //queries
 const { 
     top5AndLeast5PortsArrival, 
-    percentileDurationCandleStick } = require('./queries');
+    nearestRankMethodForDuration,
+    nearestRankMethodForVesselDelay } = require('./queries');
 //config
 const config = require('./config.json');
 
@@ -34,21 +35,21 @@ const logger = createLogger({
 async function init(){
    logger.info('start');
    const vessels = await downloadVessels(config.urlVessels, logger, createHttpsRequest);
-   logger.info(`vessel data downloaded, nr ${vessels.length}`);
+   logger.info(`vessel data downloaded, count ${vessels.length}`);
    const portCalls = await downloadSchedules(config.urlPortCalls, config.parallelism, vessels, logger, createHttpsRequest);
-   logger.info(`vesselSchema data downloaded, nr ${portCalls.length}`);
+   logger.info(`vesselSchema data downloaded, count ${portCalls.length}`);
    const star = buildStarSchema(vessels, portCalls.filter(pc => !pc.error), logger);
-   const leastMost = top5AndLeast5PortsArrival(star);
-   console.log(leastMost);
-   const candleStick = percentileDurationCandleStick(star);
-   console.log(candleStick);
-   /*const schedules = await downloadSchedules(config.urlPortCalls, config.parallelism, logger, createHttpsRequest);
-   const star = buildStarSchema(vessels, schedules);
-   for (const query of queries){
-        const report = query(star);
-        printReport(report);
-   }*/
+   logger.info('Star schema build');
+   // reports
+   /*const [top5, lowest5] = top5AndLeast5PortsArrival(star);
+   console.log(top5);
+   console.log(lowest5);
+   const durationRank = nearestRankMethodForDuration(star,5,20,50,75,90);
+   console.log(durationRank);*/
+   const dayDelays = nearestRankMethodForVesselDelay(star, 5,50,80);
+   console.log(dayDelays(2,14,7));
 }
+
 
 init()
 .catch(err => {

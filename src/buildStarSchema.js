@@ -48,6 +48,10 @@ module.exports = function buildStarSchema(vessels, schedules, logger) {
                 const logEntry = new LogEntry(portCall, lo_arrival, lo_departure, lo_isOmitted, lo_createdDate, lo_updatedField);
                 portCall.addLogEntry(logEntry);
             }
+            // sort logEntries on createDate (just to be sure)
+            portCall.logEntries.sort((l1,l2)=>{
+                return l1.compareTo(l2);
+            })
             star.addPortCall(portCall);
         }
     }

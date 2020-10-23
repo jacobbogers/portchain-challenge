@@ -8,6 +8,10 @@ class LogEntry {
         this.updatedField = updatedField;
     }
 
+    compareTo(le){
+        return this.createDate - le.createDate; //ms
+    }
+
 }
 
 module.exports = LogEntry;
