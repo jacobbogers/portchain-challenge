@@ -1,10 +1,10 @@
 
 const setContentType = require('./setContentType');
-const omitInPlaceIgnoreCase = require('../omitIgnoreCase');
+const omitInPlaceIgnoreCase = require('./omitIgnoreCase');
 const getResponseFromRequest = require('./getResponseFromRequest');
 const writeToStreamAndEnd = require('./writeToStreamAndEnd');
-const bleedReadable = require('../bleedReadable');
-const stripCtrlCodes = require('../stripControlCodes');
+const bleedReadable = require('./bleedReadable');
+const stripCtrlCodes = require('./stripControlCodes');
 const isHttpSuccess = require('./isHttpSuccess');
 
 module.exports = function createHttpClient(createHttpRequest, logger, config) {

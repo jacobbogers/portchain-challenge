@@ -1,5 +1,5 @@
 
-const humanizeDuration = require('humanize-duration');
+const humanDuration = require('human-duration');
 
 function top5AndLeast5PortsArrival(star) {
     // tally up the arrivals p
@@ -51,7 +51,7 @@ function nearestRankMethodForDuration(star, ...percentiles) {
         for (const perc of percentiles) {
             // nearest rank method
             const n = Math.trunc(perc / 100 * (histogram.raw.length));
-            rank[`${perc}%`] = humanizeDuration(histogram.raw[n]);
+            rank[`${perc}%`] = humanDuration.fmt(histogram.raw[n]).separator(':').toString();
         }
         report.push({ port: `${port.id}-(${port.name})`, ...rank, nrSamples: histogram.raw.length });
     }
@@ -120,7 +120,7 @@ function nearestRankMethodForVesselDelay(star, ...percentiles) {
                 for (const perc of percentiles) {
                     // nearest rank method
                     const n = Math.trunc(perc / 100 * (histogram.raw.length));
-                    rank[`${perc}%`] = humanizeDuration(histogram.raw[n]);
+                    rank[`${perc}%`] = humanDuration.fmt(histogram.raw[n]).separator(':').toString();
                 }
                 histogram.percentiles = rank;
                 finalReport.push({ vessel, ['days from arrival']:day,  ...rank, nrSamples: histogram.raw.length });
