@@ -1,5 +1,5 @@
 /**
- * BI-Star Schema, well actually its snowflake since vessels have 
+ * BI-Star Schema
  */
 class Star {
     constructor() {
