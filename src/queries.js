@@ -97,11 +97,12 @@ function nearestRankMethodForVesselDelay(star, ...percentiles) {
         //let report = new Map();
         const collect = new Map();
         for (const portCall of star.getAllPortCalls()) {
+            const vessel = `${portCall.vessel.id} ${portCall.vessel.name}`;
             if (portCall.isOmitted) {
                 continue;
             }
             const foreCasts = getActualAndForeCasts(portCall.logEntries, delayDays);
-            const vessel = `${portCall.vessel.id} ${portCall.vessel.name}`;
+            
             let stats = collect.get(vessel);
             if (!stats) {
                 stats = days.reduce((c, d) => { c[d] = { raw: [] }; return c; }, {});
@@ -109,8 +110,11 @@ function nearestRankMethodForVesselDelay(star, ...percentiles) {
             }
             // merge 
             for (const [day, v] of Object.entries(stats)) {
-                v.raw.push(foreCasts[day]);
+                if (foreCasts[day] !== undefined){
+                    v.raw.push(foreCasts[day]);
+                }
             }
+           
         }
         const finalReport = [];
         for (const [vessel, stats] of collect.entries()) {

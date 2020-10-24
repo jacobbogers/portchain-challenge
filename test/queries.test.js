@@ -75,6 +75,7 @@ describe('queries', function () {
     it('percentiles (5, 50, 80) for day delays for 2,7,14 days', function(){
         const dayDelays = nearestRankMethodForVesselDelay(star, 5, 50, 80);
         const dayDelayRanks = dayDelays(2,14,7);
+        console.log(dayDelayRanks);
         expect(dayDelayRanks).to.deep.equal(dayDelayRankResult);
     })
 });
