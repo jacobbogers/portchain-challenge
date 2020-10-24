@@ -127,7 +127,11 @@ function nearestRankMethodForVesselDelay(star, ...percentiles) {
             }
         }
         // post process
-        return finalReport;
+        return finalReport.sort((a,b)=>{
+            if (a.vessel > b.vessel) return 1;
+            if (a.vessel < b.vessel) return -1;
+            return 0;
+        });
     }
 }
 

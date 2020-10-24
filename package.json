@@ -13,8 +13,8 @@
   "scripts": {
     "start": "node src/app.js",
     "coverage": "nyc mocha",
-    "lint": "eslint src/**/*.js",
-    "fix": "eslint .eslintrc.js src/**/*.js --fix",
+    "lint": "eslint src/**/*.js test/**/*.js",
+    "fix": "eslint .eslintrc.js src/**/*.js test/**/*.js --fix",
     "test": "mocha"
   },
   "nyc": {

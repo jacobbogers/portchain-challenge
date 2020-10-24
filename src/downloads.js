@@ -52,7 +52,7 @@ async function downloadSchedules(uri, parallelism, vessels, logger, createHttpsR
             }
             operationalRequest.shift();
         }
-        else { // speedup
+        else { // speedup if remaining request is less than "parallelism" value
             const results =  await Promise.allSettled(operationalRequest.map(or => or.req));
             for (let i = 0; i < results.length; i++){
                 const { status, value: [v, err], reason } = results[i];

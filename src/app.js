@@ -19,7 +19,7 @@ const {
     nearestRankMethodForDuration,
     nearestRankMethodForVesselDelay } = require('./queries');
 //config
-const config = require('./config.json');
+const config = require('../config.json');
 
 // initialize logger
 function format(text) {
@@ -48,19 +48,18 @@ async function init() {
     logger.info(`vesselSchema data downloaded, count ${portCalls.length}`);
     const star = buildStarSchema(vessels, portCalls.filter(pc => !pc.error), logger);
     logger.info('star schema build');
-    // reports
+    // generate reports
     const [top5, lowest5] = top5AndLeast5PortsArrival(star);
-    //console.log(top5);
-    //console.log(lowest5);
     const durationRank = nearestRankMethodForDuration(star, 5, 20, 50, 75, 90);
-    //console.log(durationRank);
     const dayDelays = nearestRankMethodForVesselDelay(star, 5, 50, 80);
     const dayDelayRanks = dayDelays(2,14,7);
     logger.info('reports generated');
+
+    // print reports
     printReport('The top 5 ports with the most arrivals', {name: 'port', alignment: 'left'}, top5 );
     printReport('The top 5 ports with the fewest arrivals', {name: 'port', alignment: 'left'}, lowest5 );
     printReport('Port call durations percentiles',  { name: 'port', alignment: 'left'}, durationRank);
-    printReport('Vessel port call daly percentiles',{ name: 'port', alignment: 'left'}, dayDelayRanks);
+    printReport('Vessel port call daily percentiles',{ name: 'vessel', alignment: 'left'}, dayDelayRanks);
 }
 
 
