@@ -1,5 +1,10 @@
 # portchain-challenge
 
+Some notes:
+- use node v12.x
+- I used node apis to fetch data from the REST endpoints, to show I am comfortable understanding node streams/sockets/http.
+- throttled Parallel fetch implemented
+
 ## Configuration
 
 This app uses a config file `config.json` for external REST endpoints
